@@ -2,7 +2,7 @@
 title: 'Spec: Financial Services'
 ---
 
-This guide explains how Financial Service companies should send core user and accoun data to Segment.
+This guide explains how Financial Service companies should send core user and account data to Segment.
 
 ## Overview
 
@@ -17,43 +17,43 @@ The Financial Service category has the following semantic events:
 * [Account Deleted](#account-deleted)
 * [Signed In](#signed-in)
 * [Signed Out](#signed-out)
-* [Invite Sent] (#invite-sent)
+* [Invite Sent](#invite-sent)
 * [Account Added User](#account-added-user)
 * [Account Removed User](#account-removed-user)
 * [Adverse Action Delivered](#adverse-action)
-* [Agreement Drawn] (#agreement-drawn)
-* [Agreement Executed] (#agreement-executed)
-* [Agreement Exited] (#agreement-exited)
-* [Application Delivered] (#application-delivered)
-* [Application Signed] (#application-signed)
-* [Application Started] (#application-started)
-* [Application Closed] (#application-closed)
-* [Closing Scheduled] (#closing-scheduled)
-* [Credit Pulled] (#credit-pulled)
-* [Disclosure Issued] (#disclosure-issued)
-* [Document Received] (#document-received)
-* [Document Requested] (#document-requested)
-* [Escrow Disbursed] (#escrow-disbursed)
-* [Fee Applied] (#fee-applied)
-* [Funds Disbursed] (#funds-disbursed)
-* [Offer Presented] (#offer-presented)
-* [Payment Received] (#payment-recieved)
-* [Payment Returned] (#payment-returned)
-* [Recording Completed] (#recording-completed)
-* [Refund Approved] (#refund-approved)
-* [Refund Denied] (#refund-denied)
-* [Refund Requested] (#refund-requested)
-* [Service Ordered] (#service-ordered)
-* [Service Returned] (#service-returned)
-* [Statement Created] (#statement-created)
-* [Statement Delivered] (#statement-delivered)
-* [Terms Delivered] (#terms-delivered)
-* [Terms Accepted] (#terms-accepted)
-* [Terms Declined] (#terms-declined)
-* [Transaction Cancelled] (#transaction-cancelled)
-* [Transaction Completed] (#transaction-completed)
-* [Underwriting Submitted] (#underwriting-submitted)
-* [Underwriting Responded] (#underwriting-responded)
+* [Agreement Drawn](#agreement-drawn)
+* [Agreement Executed](#agreement-executed)
+* [Agreement Exited](#agreement-exited)
+* [Application Delivered](#application-delivered)
+* [Application Signed](#application-signed)
+* [Application Started](#application-started)
+* [Application Closed](#application-closed)
+* [Closing Scheduled](#closing-scheduled)
+* [Credit Pulled](#credit-pulled)
+* [Disclosure Issued](#disclosure-issued)
+* [Document Received](#document-received)
+* [Document Requested](#document-requested)
+* [Escrow Disbursed](#escrow-disbursed)
+* [Fee Applied](#fee-applied)
+* [Funds Disbursed](#funds-disbursed)
+* [Offer Presented](#offer-presented)
+* [Payment Received](#payment-recieved)
+* [Payment Returned](#payment-returned)
+* [Recording Completed](#recording-completed)
+* [Refund Approved](#refund-approved)
+* [Refund Denied](#refund-denied)
+* [Refund Requested](#refund-requested)
+* [Service Ordered](#service-ordered)
+* [Service Returned](#service-returned)
+* [Statement Created](#statement-created)
+* [Statement Delivered](#statement-delivered)
+* [Terms Delivered](#terms-delivered)
+* [Terms Accepted](#terms-accepted)
+* [Terms Declined](#terms-declined)
+* [Transaction Cancelled](#transaction-cancelled)
+* [Transaction Completed](#transaction-completed)
+* [Underwriting Submitted](#underwriting-submitted)
+* [Underwriting Responded](#underwriting-responded)
 
 ### Account Created
 
@@ -356,9 +356,9 @@ This event supports the following semantic properties:
 }
 ```
 
-### Advers Action
+### Adverse Action Delivered
 
-This event should be sent when a trial is started.
+This event should be sent when an application results in an adverse action that requires notification for legal purposes.
 
 #### Properties
 
@@ -366,9 +366,9 @@ This event supports the following semantic properties:
 
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| `trial_start_date` | Date   | The date when the trial starts. It is an ISO-8601 date string. |
-| `trial_end_date`   | Date   | The date when the trial ends. It is an ISO-8601 date string.   |
-| `trial_plan_name`  | String | The name of the plan being trialed.                            |
+| `locality` | Object   | The locality of the applicant. |
+| `loss_reason`   | String   | Reason for the adverse action.   |
+| `loss_type`  | String | Additional details of related to the action.                            |
 | `context.groupId`  | String | The id of the account the trial is associated with.            |
 
 #### Example
@@ -403,9 +403,9 @@ This event supports the following semantic properties:
 }
 ```
 
-### Trial Ended
+### Agreement Drawn
 
-This event should be sent when a trial ends.
+This event should be sent when a new agreement or contract is drawn up.
 
 #### Properties
 
@@ -424,7 +424,7 @@ This event supports the following semantic properties:
 {% comment %} api-example '{
   "userId": "019mr8mf4r",
   "type": "track",
-  "event": "Trial Ended",
+  "event": "Agreement Drawn",
   "properties": {
     "trial_start_date": "2018-08-28T04:09:47Z",
     "trial_end_date": "2018-09-20T04:09:47Z",
@@ -450,3 +450,290 @@ This event supports the following semantic properties:
   }
 }
 ```
+
+### Agreement Executed
+
+This event should be sent when a new agreement or contract is signed.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Agreement Exited
+
+This event should be sent when an existing agreement or contract is exited or completed.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Application Delivered
+
+This event should be sent when a new application or contract is sent to user for signature.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Application Signed
+
+This event should be sent when a user returns a signed application or contract.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Application Updated
+
+This event should be sent when a user completes filling out a section of an online application.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Application Withdrawn
+
+This event should be sent when an application or contract is cancelled by the user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Closing Scheduled
+
+This event should be sent when a Closing is scheduled.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Credit Pulled
+
+This event should be sent when a user's credit is pulled from a credit bureau.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Disclosure Issued
+
+This event should be sent when a disclosure document is sent to a user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Document Requested
+
+This event should be sent when a document is requested from a user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Document Received
+
+This event should be sent when a document is received from a user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Escrow Disbursed
+
+This event should be sent when funds are disbursed from an escrow account.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Fee Applied
+
+This event should be sent when a fee is charged to an account.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Funds Disbursed
+
+This event should be sent when a funds are disbursed to a user or their proxy.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Offer Presented
+
+This event should be sent when an offer is presented to a user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Payment Received
+
+This event should be sent when a payment is received from a user/proxy.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Payment Returned
+
+This event should be sent when a payment is returned due to error (NSF, etc.).
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Recording Completed
+
+This event should be sent when a recording of a transaction with a government entity has been finalized, typically with a real estate transaction.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Refund Approved
+
+This event should be sent when a refund requested by a user has been approved.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Refund Requested
+
+This event should be sent when a refund is requested by a user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Refund Denied
+
+This event should be sent when a refund requested by a user has been denied.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Service Ordered
+
+This event should be sent when services are ordered as part of an agreement.  This is typically part of a real estate transaction that requires appraisal and title be collected from a 3rd party.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Service Returned
+
+This event should be sent when an ordered service has returned to necessary materials.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Statement Created
+
+This event should be sent when an account statement has been generated.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Statement Delivered
+
+This event should be sent when an account statement has been delivered to the user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Terms Delivered
+
+This event should be sent when an agreement or contract terms have been presented to the user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Terms Accepted
+
+This event should be sent when a user has accepted the terms of an agreement or contract.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Terms Declined
+
+This event should be sent when a user has declined to accept the terms of an agreement or contract.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Transaction Cancelled
+
+This event should be sent when a transaction on an account is cancelled or rolled back.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Transaction Completed
+
+This event should be sent when a transaction on an account has finalized.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Underwriting Submitted
+
+This event should be sent when a file is submitted to an underwriter for approval.  Typically occurs in real estate and insurance transactions.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Underwriting Responded
+
+This event should be sent when a file is returned from the underwriter.  Typically occurs in real estate and insurance transactions.
+
+#### Properties
+
+This event supports the following semantic properties:
