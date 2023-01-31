@@ -26,7 +26,7 @@ The Financial Service category has the following semantic events:
 * [Agreement Exited](#agreement-exited)
 * [Application Delivered](#application-delivered)
 * [Application Signed](#application-signed)
-* [Application Started](#application-started)
+* [Application Revised](#application-revised)
 * [Application Closed](#application-closed)
 * [Closing Scheduled](#closing-scheduled)
 * [Credit Pulled](#credit-pulled)
@@ -459,6 +459,13 @@ This event should be sent when a new agreement or contract is signed.
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `agreement_start_date` | Date   | The date when the agreement/contract starts. It is an ISO-8601 date string. |
+| `agreement_end_date`   | Date   | The date when the agreement/contract ends. It is an ISO-8601 date string.   |  
+| `agreement_id`   | String   | The ID of the document / agreement.   |                       |
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
+
 
 ### Agreement Exited
 
@@ -468,6 +475,11 @@ This event should be sent when an existing agreement or contract is exited or co
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `agreement_id`   | String   | The ID of the application (or opportunity).   |   
+| `exit_reason`   | String   | The reason the agreement is ending.  |                       
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Application Delivered
 
@@ -477,6 +489,10 @@ This event should be sent when a new application or contract is sent to user for
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Application Signed
 
@@ -486,15 +502,24 @@ This event should be sent when a user returns a signed application or contract.
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
-### Application Updated
+### Application Revised
 
-This event should be sent when a user completes filling out a section of an online application.
+This event should be sent when a user completes filling out a part/section of an application.
 
 #### Properties
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
+| `application_type`   | String   | The product being applied for (i.e. auto loan, mortgage, etc.).   |                       |
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Application Withdrawn
 
@@ -504,15 +529,24 @@ This event should be sent when an application or contract is cancelled by the us
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
+| `reason`   | String   | The reason the application is being closed.   |                       |
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Closing Scheduled
 
-This event should be sent when a Closing is scheduled.
+This event should be sent when a Closing meeting is scheduled.
 
 #### Properties
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `scheduled_time`   | DateTime   | The date and time the closing meeting is scheduled.   |                                       
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Credit Pulled
 
@@ -522,6 +556,15 @@ This event should be sent when a user's credit is pulled from a credit bureau.
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `type`   | String   | The type of credit pull initiated (soft, hard).   |   
+| `credit_bureau`   | String   | The name of the credit bureau or source of the credit report   |   
+| `transaction_id`   | String   | The transaction ID provided by the credit service endpoint.   |  
+| `score`   | Number   | The numeric credit score.   | 
+| `score_provider`   | String   |  FICO&reg; or Vantage&reg;  | 
+| `score_type`   | String   | The type of score returned.   |                   
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Disclosure Issued
 
@@ -540,6 +583,12 @@ This event should be sent when a document is requested from a user.
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `document_id`   | String/Number   | The ID assigned to the document   |   
+| `document_type`   | String  | The type of document being requested.  |  
+| `due_date`   | Date  | Date the document must be returned.   |                                            
+
 
 ### Document Received
 
@@ -549,6 +598,11 @@ This event should be sent when a document is received from a user.
 
 This event supports the following semantic properties:
 
+| Property           | Type   | Description                                                    |
+| ------------------ | ------ | -------------------------------------------------------------- |
+| `document_id`   | String/Number   | The ID assigned to the document   |   
+| `document_type`   | String  | The type of document being requested.  |  
+| `document`   | String  | The URL of the document  | 
 
 ### Escrow Disbursed
 
