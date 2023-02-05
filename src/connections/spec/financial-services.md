@@ -27,7 +27,7 @@ The Financial Service category has the following semantic events:
 * [Application Delivered](#application-delivered)
 * [Application Signed](#application-signed)
 * [Application Revised](#application-revised)
-* [Application Closed](#application-closed)
+* [Application Withdrawn](#application-withdrawn)
 * [Closing Scheduled](#closing-scheduled)
 * [Credit Pulled](#credit-pulled)
 * [Disclosure Issued](#disclosure-issued)
@@ -37,6 +37,8 @@ The Financial Service category has the following semantic events:
 * [Fee Applied](#fee-applied)
 * [Funds Disbursed](#funds-disbursed)
 * [Offer Presented](#offer-presented)
+* [Offer Accepted](#offer-accepted)
+* [Offer Rejected](#offer-rejected)
 * [Payment Received](#payment-recieved)
 * [Payment Returned](#payment-returned)
 * [Recording Completed](#recording-completed)
@@ -369,7 +371,7 @@ This event supports the following semantic properties:
 | `locality` | Object   | The locality of the applicant. |
 | `loss_reason`   | String   | Reason for the adverse action.   |
 | `loss_type`  | String | Additional details of related to the action.                            |
-| `context.groupId`  | String | The id of the account the trial is associated with.            |
+| `context.groupId`  | String | The id of the account the action is associated with.            |
 
 #### Example
 
@@ -413,10 +415,10 @@ This event supports the following semantic properties:
 
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| `trial_start_date` | Date   | The date when the trial starts. It is an ISO-8601 date string. |
-| `trial_end_date`   | Date   | The date when the trial ends. It is an ISO-8601 date string.   |
-| `trial_plan_name`  | String | The name of the plan being trialed.                            |
-| `context.groupId`  | String | The id of the account the trial is associated with.            |
+| `agreement_start_date` | Date   | The date when the agreement starts. It is an ISO-8601 date string. |
+| `agreement_end_date`   | Date   | The date when the agreement ends. It is an ISO-8601 date string.   |
+| `agreement_type`  | String | The type of agreement.                            |
+| `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 
 #### Example
@@ -462,7 +464,8 @@ This event supports the following semantic properties:
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
 | `agreement_start_date` | Date   | The date when the agreement/contract starts. It is an ISO-8601 date string. |
-| `agreement_end_date`   | Date   | The date when the agreement/contract ends. It is an ISO-8601 date string.   |  
+| `agreement_end_date`   | Date   | The date when the agreement/contract ends. It is an ISO-8601 date string.   | 
+| `executed_date`   | Date   | The date when the agreement/contract was officially signed. It is an ISO-8601 date string.   | 
 | `agreement_id`   | String   | The ID of the document / agreement.   |                       |
 | `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
@@ -478,6 +481,7 @@ This event supports the following semantic properties:
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
 | `agreement_id`   | String   | The ID of the application (or opportunity).   |   
+| `agreement_exited_date`   | Date   | The date when the agreement/contract was exited. It is an ISO-8601 date string.   | 
 | `exit_reason`   | String   | The reason the agreement is ending.  |                       
 | `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
@@ -491,7 +495,8 @@ This event supports the following semantic properties:
 
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
+| `application_id`   | String   | The ID of the application (or opportunity).   |                    
+| `date_delivered`   | Date   | The date when the application was presented to the user. It is an ISO-8601 date string.   | 
 | `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Application Signed
@@ -504,7 +509,8 @@ This event supports the following semantic properties:
 
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
+| `application_id`   | String   | The ID of the application (or opportunity).   |             
+| `date_signed`   | Date   | The date when the application was signed by the user. It is an ISO-8601 date string.   | 
 | `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Application Revised
@@ -517,9 +523,10 @@ This event supports the following semantic properties:
 
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
-| `application_type`   | String   | The product being applied for (i.e. auto loan, mortgage, etc.).   |                       |
-| `context.groupId`  | String | The id of the account the agreement is associated with.            |
+| `application_id`   | String   | The document ID of the application (or opportunity).   |                       
+| `application_type`   | String   | The product being applied for (i.e. auto loan, mortgage, etc.).   | 
+| `section_updated`   | String   | The section of the application that was revised.   | 
+| `context.groupId`  | String | The id of the account the application is associated with.            |
 
 ### Application Withdrawn
 
@@ -531,8 +538,8 @@ This event supports the following semantic properties:
 
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| `application_id`   | String   | The ID of the application (or opportunity).   |                       |
-| `reason`   | String   | The reason the application is being closed.   |                       |
+| `application_id`   | String   | The ID of the application (or opportunity).   |                       
+| `reason`   | String   | The reason the application is being closed.   |                       
 | `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Closing Scheduled
@@ -545,8 +552,10 @@ This event supports the following semantic properties:
 
 | Property           | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| `scheduled_time`   | DateTime   | The date and time the closing meeting is scheduled.   |                                       
-| `context.groupId`  | String | The id of the account the agreement is associated with.            |
+| `scheduled_time`   | DateTime   | The date and time the closing meeting is scheduled.   |  
+| `location`   | String   | The location of the closing meeting.   |  
+| `agreement_id`   | String   | The ID of the agreement to be executed at the closing.   |  
+| `context.groupId`  | String | The id of the account the closing is associated with.            |
 
 ### Credit Pulled
 
@@ -563,7 +572,8 @@ This event supports the following semantic properties:
 | `transaction_id`   | String   | The transaction ID provided by the credit service endpoint.   |  
 | `score`   | Number   | The numeric credit score.   | 
 | `score_provider`   | String   |  FICO&reg; or Vantage&reg;  | 
-| `score_type`   | String   | The type of score returned.   |                   
+| `score_type`   | String   | The type of score returned.   | 
+| `scores`   | Object   | If multiple reports are requested, the response is an object array.   | 
 | `context.groupId`  | String | The id of the account the agreement is associated with.            |
 
 ### Disclosure Issued
@@ -603,6 +613,7 @@ This event supports the following semantic properties:
 | `document_id`   | String/Number   | The ID assigned to the document   |   
 | `document_type`   | String  | The type of document being requested.  |  
 | `document`   | String  | The URL of the document  | 
+| `remaining_docs_requested`   | Number  | The number of additional documents that have been requested.  | 
 
 ### Escrow Disbursed
 
@@ -632,6 +643,24 @@ This event supports the following semantic properties:
 
 
 ### Offer Presented
+
+This event should be sent when an offer is presented to a user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Offer Accepted
+
+This event should be sent when an offer is presented to a user.
+
+#### Properties
+
+This event supports the following semantic properties:
+
+
+### Offer Rejected
 
 This event should be sent when an offer is presented to a user.
 
