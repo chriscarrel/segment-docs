@@ -14,7 +14,7 @@ Most Financial Service companies have a few common, core events for users, accou
 The Financial Service category has the following semantic events:
 
 * [Account Created](#account-created)
-* [Account Deleted](#account-deleted)
+* [Account Closed](#account-closed)
 * [Signed In](#signed-in)
 * [Signed Out](#signed-out)
 * [Invite Sent](#invite-sent)
@@ -100,9 +100,11 @@ This event supports the following semantic properties:
 }
 ```
 
-### Account Deleted
+### Account Closed
 
-This event should be sent when an account is deleted.
+This event should be sent when an account is closed/no longer valid.  
+
+> **Good to know**: This is equivilant to Account Deleted in other Segment specs, but fully removing accounts is not allowed in regulated industries like health care and finance.
 
 #### Properties
 
