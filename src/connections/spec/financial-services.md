@@ -33,7 +33,7 @@ The Financial Service category has the following semantic events:
 * [Disclosure Issued](#disclosure-issued)
 * [Document Received](#document-received)
 * [Document Requested](#document-requested)
-* [Escrow Disbursed](#escrow-disbursed)
+* [Escrow Funded](#escrow-funded)
 * [Fee Applied](#fee-applied)
 * [Funds Disbursed](#funds-disbursed)
 * [Offer Presented](#offer-presented)
@@ -617,9 +617,9 @@ This event supports the following semantic properties:
 | `document`   | String  | The URL of the document  | 
 | `remaining_docs_requested`   | Number  | The number of additional documents that have been requested.  | 
 
-### Escrow Disbursed
+### Escrow Funded
 
-This event should be sent when funds are disbursed from an escrow account.
+This event should be sent when funds are sent to an escrow account.
 
 #### Properties
 
@@ -637,7 +637,7 @@ This event supports the following semantic properties:
 
 ### Funds Disbursed
 
-This event should be sent when a funds are disbursed to a user or their proxy.
+This event should be sent when a funds are disbursed to a user or their proxy either directly or from an escrow account.
 
 #### Properties
 
